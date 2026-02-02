@@ -1,0 +1,951 @@
+[00:00:02.908] Server  LOG     
+[00:00:02.909] Server  LOG        We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+[00:00:02.910] Server  LOG        The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+[00:00:02.910] Server  LOG        	- include was updated to add '.next/dev/types/**/*.ts'
+[00:00:02.911] Server  LOG     
+[00:00:02.911] Server  LOG        The following mandatory changes were made to your tsconfig.json:
+
+[00:00:02.912] Server  LOG        	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:02.913] Server  LOG     
+[00:00:03.484] Server  LOG      ✓ Ready in 2.4s
+[00:00:26.484] Server  LOG      ○ Compiling / ...
+[00:00:42.047] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:46.468] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:48.014] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:48.014] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:48.014] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770022537492}
+[00:00:55.656] Server  LOG      ○ Compiling /analyze ...
+[00:00:56.559] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:56.901] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:00:57.158] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770022546629}
+[00:03:51.069] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:03:52.953] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:04:06.820] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:04:10.314] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:12.054] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:04:12.054] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:04:12.054] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770022741529}
+[00:04:43.218] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:04:45.862] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:04:56.707] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:04:57.569] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770022787008}
+[00:05:32.181] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:05:32.473] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770022821938}
+[00:05:59.914] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:37:22.503] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:22.763] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:37:22.763] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/analyze","route":"/analyze"}
+[00:37:22.763] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770024732244}
+[00:37:45.465] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:37:45.646] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:37:45.706] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:37:45.776] Server  WARN     ⚠ Unsupported metadata viewport is configured in metadata export in /analyze. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+[00:40:41.879] Server  LOG      ○ Compiling /_not-found/page ...
+[00:41:48.979] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:49.981] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:41:49.981] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:41:49.981] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770024999459}
+[00:44:49.073] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:50.081] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:44:50.082] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:44:50.082] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770025179563}
+[00:47:51.874] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770025361340}
+[00:48:05.466] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770025374943}
+[00:48:50.828] Browser ERROR   [API Error] Network Error
+[00:49:06.581] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:06.864] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:49:06.864] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/analyze","route":"/analyze"}
+[00:49:06.864] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770025436338}
+[00:49:46.774] Browser ERROR   [API Error] Network Error
+[00:50:19.315] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770025508791}
+[01:44:12.687] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:44:13.496] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:44:13.496] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[01:44:13.496] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3001/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770028742975}
+[01:44:15.855] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770028745300}
+[01:44:29.432] Browser ERROR   [API Error] Network Error
+[01:45:41.007] Server  LOG      ✓ Compiled in 5.3s
+[01:45:43.309] Server  LOG      ✓ Compiled in 1170ms
+[01:46:10.658] Server  LOG      ✓ Compiled in 3.8s
+[01:46:20.988] Server  LOG      ✓ Compiled in 4.3s
+[01:46:43.975] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:46:44.613] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:46:44.613] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/analyze","route":"/analyze"}
+[01:46:44.613] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770028894085}
+[01:47:02.404] Browser ERROR   [API Error] Network Error
+[01:47:02.404] Browser WARN    Image analysis failed, using mock data: Network Error
+[01:47:30.732] Server  LOG      ✓ Compiled in 145ms
+[01:47:51.727] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:47:52.338] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[01:47:52.338] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/analyze","route":"/analyze"}
+[01:47:52.338] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3001/analyze color: rgb(120, 120, 120) color: inherit {"dp":"/analyze","o":"http://localhost:3001/analyze","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770028961807}
+[01:48:05.213] Browser WARN    Image analysis failed, using mock data: Network Error
+[01:49:50.500] Browser WARN    Text analysis failed, using mock data: Network Error
+[01:58:07.203] Browser WARN    Text analysis failed, using mock data: Network Error
+[01:58:24.863] Browser WARN    Text analysis failed, using mock data: Network Error
+[02:37:47.946] Server  ERROR    ⨯ ./app/analyze/page.jsx:10:1
+Module not found: Can't resolve '@/components/audio-analyzer'
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+> 10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+  13 | const tabs = [
+
+Import map: aliased to relative './components/audio-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:47.983] Server  ERROR    ⨯ ./app/analyze/page.jsx:10:1
+Module not found: Can't resolve '@/components/audio-analyzer'
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+> 10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+  13 | const tabs = [
+
+Import map: aliased to relative './components/audio-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.013] Server  ERROR    ⨯ ./app/analyze/page.jsx:10:1
+Module not found: Can't resolve '@/components/audio-analyzer'
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+> 10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+  13 | const tabs = [
+
+Import map: aliased to relative './components/audio-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.265] Server  ERROR    ⨯ ./app/analyze/page.jsx:10:1
+Module not found: Can't resolve '@/components/audio-analyzer'
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+> 10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+  13 | const tabs = [
+
+Import map: aliased to relative './components/audio-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.293] Server  ERROR    ⨯ ./app/analyze/page.jsx:8:1
+Module not found: Can't resolve '@/components/image-analyzer'
+   6 | import { Card } from '@/components/ui/card';
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+>  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+
+Import map: aliased to relative './components/image-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.312] Server  ERROR    ⨯ ./app/analyze/page.jsx:8:1
+Module not found: Can't resolve '@/components/image-analyzer'
+   6 | import { Card } from '@/components/ui/card';
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+>  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+
+Import map: aliased to relative './components/image-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.343] Server  ERROR    ⨯ ./app/analyze/page.jsx:8:1
+Module not found: Can't resolve '@/components/image-analyzer'
+   6 | import { Card } from '@/components/ui/card';
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+>  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+
+Import map: aliased to relative './components/image-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.399] Server  ERROR    ⨯ ./app/analyze/page.jsx:8:1
+Module not found: Can't resolve '@/components/image-analyzer'
+   6 | import { Card } from '@/components/ui/card';
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+>  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+
+Import map: aliased to relative './components/image-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.415] Server  ERROR    ⨯ ./app/analyze/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { useState } from 'react';
+  4 | import { motion } from 'framer-motion';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Card } from '@/components/ui/card';
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.428] Server  ERROR    ⨯ ./app/analyze/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { useState } from 'react';
+  4 | import { motion } from 'framer-motion';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Card } from '@/components/ui/card';
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.452] Server  ERROR    ⨯ ./app/analyze/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { useState } from 'react';
+  4 | import { motion } from 'framer-motion';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Card } from '@/components/ui/card';
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.479] Server  ERROR    ⨯ ./app/analyze/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { useState } from 'react';
+  4 | import { motion } from 'framer-motion';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Card } from '@/components/ui/card';
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.523] Server  ERROR    ⨯ ./app/analyze/page.jsx:7:1
+Module not found: Can't resolve '@/components/text-analyzer'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Card } from '@/components/ui/card';
+>  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+
+Import map: aliased to relative './components/text-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.559] Server  ERROR    ⨯ ./app/analyze/page.jsx:7:1
+Module not found: Can't resolve '@/components/text-analyzer'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Card } from '@/components/ui/card';
+>  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+
+Import map: aliased to relative './components/text-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.591] Server  ERROR    ⨯ ./app/analyze/page.jsx:7:1
+Module not found: Can't resolve '@/components/text-analyzer'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Card } from '@/components/ui/card';
+>  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+
+Import map: aliased to relative './components/text-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.606] Server  ERROR    ⨯ ./app/analyze/page.jsx:7:1
+Module not found: Can't resolve '@/components/text-analyzer'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Card } from '@/components/ui/card';
+>  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+   9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+
+Import map: aliased to relative './components/text-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.623] Server  ERROR    ⨯ ./app/analyze/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/card'
+  4 | import { motion } from 'framer-motion';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Card } from '@/components/ui/card';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.642] Server  ERROR    ⨯ ./app/analyze/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/card'
+  4 | import { motion } from 'framer-motion';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Card } from '@/components/ui/card';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { TextAnalyzer } from '@/components/text-analyzer';
+  8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.659] Server  ERROR    ⨯ ./app/analyze/page.jsx:9:1
+Module not found: Can't resolve '@/components/video-analyzer'
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+>  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+
+Import map: aliased to relative './components/video-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.700] Server  ERROR    ⨯ ./app/analyze/page.jsx:9:1
+Module not found: Can't resolve '@/components/video-analyzer'
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+>  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+
+Import map: aliased to relative './components/video-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.723] Server  ERROR    ⨯ ./app/analyze/page.jsx:9:1
+Module not found: Can't resolve '@/components/video-analyzer'
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+>  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+
+Import map: aliased to relative './components/video-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.752] Server  ERROR    ⨯ ./app/analyze/page.jsx:9:1
+Module not found: Can't resolve '@/components/video-analyzer'
+   7 | import { TextAnalyzer } from '@/components/text-analyzer';
+   8 | import { ImageAnalyzer } from '@/components/image-analyzer';
+>  9 | import { VideoAnalyzer } from '@/components/video-analyzer';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { AudioAnalyzer } from '@/components/audio-analyzer';
+  11 | import { MessageCircle, ImageIcon, Film, AlertCircle, Volume2 } from 'lucide-react';
+  12 |
+
+Import map: aliased to relative './components/video-analyzer' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/analyze/page.jsx [Client Component Browser]
+    ./app/analyze/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/analyze/page.jsx [Client Component SSR]
+    ./app/analyze/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.801] Server  ERROR    ⨯ ./app/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { motion } from 'framer-motion';
+  4 | import Link from 'next/link';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Button } from '@/components/ui/button';
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.812] Server  ERROR    ⨯ ./app/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { motion } from 'framer-motion';
+  4 | import Link from 'next/link';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Button } from '@/components/ui/button';
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.825] Server  ERROR    ⨯ ./app/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { motion } from 'framer-motion';
+  4 | import Link from 'next/link';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Button } from '@/components/ui/button';
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.866] Server  ERROR    ⨯ ./app/page.jsx:5:1
+Module not found: Can't resolve '@/components/navigation'
+  3 | import { motion } from 'framer-motion';
+  4 | import Link from 'next/link';
+> 5 | import { Navigation } from '@/components/navigation';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { Button } from '@/components/ui/button';
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+
+Import map: aliased to relative './components/navigation' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.910] Server  ERROR    ⨯ ./app/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+  4 | import Link from 'next/link';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Button } from '@/components/ui/button';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+  9 |
+
+Import map: aliased to relative './components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.938] Server  ERROR    ⨯ ./app/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+  4 | import Link from 'next/link';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Button } from '@/components/ui/button';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+  9 |
+
+Import map: aliased to relative './components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.963] Server  ERROR    ⨯ ./app/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+  4 | import Link from 'next/link';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Button } from '@/components/ui/button';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+  9 |
+
+Import map: aliased to relative './components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:48.987] Server  ERROR    ⨯ ./app/page.jsx:6:1
+Module not found: Can't resolve '@/components/ui/button'
+  4 | import Link from 'next/link';
+  5 | import { Navigation } from '@/components/navigation';
+> 6 | import { Button } from '@/components/ui/button';
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { Card } from '@/components/ui/card';
+  8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+  9 |
+
+Import map: aliased to relative './components/ui/button' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:49.046] Server  ERROR    ⨯ ./app/page.jsx:7:1
+Module not found: Can't resolve '@/components/ui/card'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Button } from '@/components/ui/button';
+>  7 | import { Card } from '@/components/ui/card';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+   9 |
+  10 | const container = {
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:49.107] Server  ERROR    ⨯ ./app/page.jsx:7:1
+Module not found: Can't resolve '@/components/ui/card'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Button } from '@/components/ui/button';
+>  7 | import { Card } from '@/components/ui/card';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+   9 |
+  10 | const container = {
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:49.114] Server  ERROR    ⨯ ./app/page.jsx:7:1
+Module not found: Can't resolve '@/components/ui/card'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Button } from '@/components/ui/button';
+>  7 | import { Card } from '@/components/ui/card';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+   9 |
+  10 | const container = {
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[02:37:49.126] Server  ERROR    ⨯ ./app/page.jsx:7:1
+Module not found: Can't resolve '@/components/ui/card'
+   5 | import { Navigation } from '@/components/navigation';
+   6 | import { Button } from '@/components/ui/button';
+>  7 | import { Card } from '@/components/ui/card';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
+   9 |
+  10 | const container = {
+
+Import map: aliased to relative './components/ui/card' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.jsx [Client Component Browser]
+    ./app/page.jsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.jsx [Client Component SSR]
+    ./app/page.jsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
