@@ -59,19 +59,6 @@ export function AudioAnalyzer() {
       setResult(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
-      // Mock result for demonstration
-      setResult({
-        trust_score: 68,
-        classification: 'Suspicious',
-        speech_authenticity: 'Medium Risk',
-        detected_issues: [
-          'Possible speech synthesis detected',
-          'Audio compression artifacts present',
-          'Unusual speech patterns identified',
-        ],
-        confidence: 78,
-        transcription: 'This is a sample transcription of the audio content that would be extracted by our AI models...',
-      });
     } finally {
       setIsLoading(false);
     }

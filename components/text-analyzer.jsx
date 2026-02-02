@@ -30,13 +30,6 @@ export function TextAnalyzer() {
       setResult(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
-      setResult({
-        trust_score: 72,
-        classification: 'Clean',
-        toxicity_level: 'Low',
-        flags: [],
-        confidence: 85,
-      });
     } finally {
       setIsLoading(false);
     }

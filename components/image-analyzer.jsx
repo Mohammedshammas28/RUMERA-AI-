@@ -44,13 +44,6 @@ export function ImageAnalyzer() {
       setResult(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
-      setResult({
-        trust_score: 65,
-        ai_generated_probability: 28,
-        authenticity_badge: 'Likely Authentic',
-        manipulation_score: 15,
-        confidence: 82,
-      });
     } finally {
       setIsLoading(false);
     }

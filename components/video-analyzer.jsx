@@ -44,14 +44,6 @@ export function VideoAnalyzer() {
       setResult(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
-      setResult({
-        trust_score: 58,
-        deepfake_likelihood: 35,
-        face_consistency: 78,
-        risk_label: 'Suspicious',
-        frames_analyzed: 240,
-        confidence: 79,
-      });
     } finally {
       setIsLoading(false);
     }
