@@ -9,7 +9,20 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+// CORS configuration for production
+const allowedOrigins = [
+  'https://rumera-ai-6sf3.vercel.app',
+  'http://localhost:3000',
+  process.env.CORS_ORIGIN || 'https://rumera-ai-6sf3.vercel.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
