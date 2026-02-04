@@ -28,13 +28,17 @@ app.use(express.urlencoded({ extended: true }));
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rumera')
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rumera', {
+    serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+    connectTimeoutMS: 5000,
+    socketTimeoutMS: 5000,
+  })
   .then(() => {
     console.log('✓ MongoDB connected');
   })
   .catch((err) => {
-    console.error('✗ MongoDB connection error:', err);
-    // Continue without MongoDB for development
+    console.error('✗ MongoDB connection error (non-critical):', err.message);
+    console.log('⚠ Continuing without MongoDB - analysis features will work');
   });
 
 // Routes
