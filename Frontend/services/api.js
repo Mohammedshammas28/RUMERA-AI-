@@ -6,11 +6,11 @@ import {
   mockAudioAnalysis 
 } from '@/lib/mock-data';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30000,
+  timeout: 60000, // Increased timeout for analysis
   headers: {
     'Content-Type': 'application/json',
   },
@@ -28,7 +28,7 @@ api.interceptors.response.use(
 export const analyzeText = async (text) => {
   try {
     const response = await api.post('/analyze/text', { text });
-    return response.data;
+    return response.data.data; // Return the data object
   } catch (error) {
     console.warn('Text analysis failed, using mock data:', error.message);
     // Return mock data if backend is unavailable
@@ -46,7 +46,7 @@ export const analyzeImage = async (imageFile) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return response.data;
+    return response.data.data; // Return the data object
   } catch (error) {
     console.warn('Image analysis failed, using mock data:', error.message);
     // Return mock data if backend is unavailable
@@ -54,17 +54,11 @@ export const analyzeImage = async (imageFile) => {
   }
 };
 
-export const analyzeVideo = async (videoFile) => {
+export const analyzeVideo = async (videoInfo) => {
   try {
-    const formData = new FormData();
-    formData.append('video', videoFile);
-    
-    const response = await api.post('/analyze/video', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
+    // For video, send metadata instead of file
+    const response = await api.post('/analyze/video', videoInfo);
+    return response.data.data; // Return the data object
   } catch (error) {
     console.warn('Video analysis failed, using mock data:', error.message);
     // Return mock data if backend is unavailable
@@ -72,17 +66,14 @@ export const analyzeVideo = async (videoFile) => {
   }
 };
 
-export const analyzeAudio = async (audioFile) => {
+export const analyzeAudio = async (transcription, filename) => {
   try {
-    const formData = new FormData();
-    formData.append('audio', audioFile);
-    
-    const response = await api.post('/analyze/audio', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+    // For audio, send transcription text
+    const response = await api.post('/analyze/audio', { 
+      transcription, 
+      filename 
     });
-    return response.data;
+    return response.data.data; // Return the data object
   } catch (error) {
     console.warn('Audio analysis failed, using mock data:', error.message);
     // Return mock data if backend is unavailable

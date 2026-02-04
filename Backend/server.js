@@ -39,6 +39,7 @@ mongoose
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/analyze', require('./routes/analyze'));
 
 // Health check
 app.get('/health', (req, res) => {
@@ -61,8 +62,13 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`\n🚀 RUMERA Backend running on http://localhost:${PORT}`);
   console.log(`📝 API Documentation:`);
-  console.log(`   POST   /api/auth/signup - Register new user`);
-  console.log(`   POST   /api/auth/login  - Login user`);
-  console.log(`   GET    /api/auth/me     - Get current user (protected)`);
-  console.log(`   GET    /health          - Health check\n`);
+  console.log(`   POST   /api/auth/signup      - Register new user`);
+  console.log(`   POST   /api/auth/login       - Login user`);
+  console.log(`   GET    /api/auth/me          - Get current user (protected)`);
+  console.log(`   POST   /analyze/text         - Analyze text`);
+  console.log(`   POST   /analyze/image        - Analyze image`);
+  console.log(`   POST   /analyze/audio        - Analyze audio`);
+  console.log(`   POST   /analyze/video        - Analyze video`);
+  console.log(`   GET    /analyze/health       - Analysis service health`);
+  console.log(`   GET    /health               - Health check\n`);
 });

@@ -40,11 +40,34 @@ export function VideoAnalyzer() {
     setResult(null);
 
     try {
-      const data = await analyzeVideo(video);
-      setResult(data);
+      // Extract video metadata
+      const videoElement = document.createElement('video');
+      videoElement.src = URL.createObjectURL(video);
+      
+      videoElement.onloadedmetadata = async () => {
+        const videoInfo = {
+          filename: video.name,
+          duration: Math.round(videoElement.duration),
+          resolution: `${videoElement.videoWidth}x${videoElement.videoHeight}`,
+          fps: 30, // Default FPS, actual value depends on source
+        };
+
+        try {
+          const data = await analyzeVideo(videoInfo);
+          setResult(data);
+        } catch (err) {
+          setError(err.message || 'Analysis failed. Please try again.');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      videoElement.onerror = () => {
+        setError('Failed to load video metadata');
+        setIsLoading(false);
+      };
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
-    } finally {
       setIsLoading(false);
     }
   };
