@@ -26,20 +26,21 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/rumera', {
-    serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
-    connectTimeoutMS: 5000,
-    socketTimeoutMS: 5000,
-  })
-  .then(() => {
-    console.log('✓ MongoDB connected');
-  })
-  .catch((err) => {
-    console.error('✗ MongoDB connection error (non-critical):', err.message);
-    console.log('⚠ Continuing without MongoDB - analysis features will work');
-  });
+// Connect to MongoDB (non-blocking, optional for analysis features)
+if (process.env.MONGODB_URI) {
+  mongoose
+    .connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
+      socketTimeoutMS: 5000,
+    })
+    .then(() => {
+      console.log('✓ MongoDB connected');
+    })
+    .catch((err) => {
+      console.error('⚠ MongoDB unavailable - analysis features work without it');
+    });
+}
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
