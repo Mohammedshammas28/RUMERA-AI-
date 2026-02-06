@@ -56,21 +56,38 @@ app.use(cors(corsOptions));
 // Handle preflight requests explicitly
 app.options('*', cors(corsOptions));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware with limits for production stability
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Initialize Advanced AI Models on startup
+// Request timeout middleware
+app.use((req, res, next) => {
+  req.setTimeout(120000); // 2 minute request timeout
+  res.setTimeout(120000);
+  next();
+});
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
+// Initialize Advanced AI Models on startup (non-blocking)
 console.log('\n========================================');
 console.log('🤖 RUMERA AI Models Initialization');
 console.log('========================================');
+console.log('⏳ Models initializing in background...\n');
+
+// Don't wait for models to finish - let them load asynchronously
 advancedModels.initializeAllModels()
   .then(status => {
-    console.log('Model Status:', status);
-    console.log('✓ All AI models initialized successfully\n');
+    console.log('✓ Model Status:', status);
+    console.log('✓ All AI models initialized\n');
   })
   .catch(err => {
-    console.error('⚠ Warning: Some models failed to initialize:', err);
-    console.log('Service will still run with available models\n');
+    console.error('⚠ Warning: Some models failed to initialize:', err.message);
+    console.log('✓ Service will still run with available models and fallbacks\n');
   });
 
 // Connect to MongoDB (non-blocking, optional for analysis features)
@@ -98,6 +115,11 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'RUMERA Backend is running' });
 });
 
+// Keep-alive endpoint for production
+app.get('/keep-alive', (req, res) => {
+  res.status(200).json({ status: 'alive' });
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });
@@ -105,14 +127,13 @@ app.use((req, res) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(500).json({ success: false, message: err.message || 'Server error' });
+  console.error('Error:', err.message);
+  res.status(500).json({ success: false, message: 'Server error' });
 });
 
 const PORT = process.env.PORT || 5001;
-
-app.listen(PORT, () => {
-  console.log(`\n🚀 RUMERA Backend running on http://localhost:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀 RUMERA Backend running on http://0.0.0.0:${PORT}`);
   console.log(`\n🎯 Advanced AI Models Integrated:`);
   console.log(`   • OpenAI Whisper - Audio transcription`);
   console.log(`   • OpenAI CLIP - Image-text understanding`);
@@ -129,4 +150,42 @@ app.listen(PORT, () => {
   console.log(`   POST   /analyze/video        - Analyze video (XceptionNet)`);
   console.log(`   GET    /analyze/health       - AI models health status`);
   console.log(`   GET    /health               - Backend health check\n`);
+});
+
+// Set server timeout to prevent hanging connections
+server.timeout = 300000; // 5 minutes
+server.keepAliveTimeout = 65000; // Keep-alive timeout
+server.headersTimeout = 66000; // Headers timeout slightly longer than keep-alive
+
+// Graceful shutdown handlers
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully...');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
+  // Force exit after 30 seconds if not done
+  setTimeout(() => {
+    console.error('Force exiting due to timeout');
+    process.exit(1);
+  }, 30000);
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received, shutting down gracefully...');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });

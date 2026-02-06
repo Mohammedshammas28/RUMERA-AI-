@@ -19,19 +19,22 @@ async function initTransformers() {
   if (transformersReady) return true;
   
   try {
-    // Suppress ONNX warnings for cleaner logs
-    process.env.ONNX_SKIP_WARMUP = '1';
+    // Disable ONNX in production to avoid memory issues and errors
+    process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
+    if (process.env.NODE_ENV === 'production') {
+      process.env.ONNX_DISABLE = '1';
+    }
     
     const { pipeline, env } = await import('@xenova/transformers');
     global.transformersPipeline = pipeline;
     global.transformersEnv = env;
     
+    // Force WASM backend only
+    env.backends.onnx.wasm.proxy = false;
     env.allowLocalModels = true;
     env.allowRemoteModels = true;
-    // Use WASM backend to avoid ONNX runtime issues in production
-    env.backends.onnx.wasm.proxy = false;
     
-    console.log('✓ Transformers module loaded');
+    console.log('✓ Transformers module loaded (WASM backend)');
     transformersReady = true;
     return true;
   } catch (error) {
