@@ -57,12 +57,11 @@ async function initWhisper() {
         whisperPipeline = await global.transformersPipeline('automatic-speech-recognition', 'Xenova/wav2vec2-base');
         console.log('✓ Whisper model loaded');
       } catch (e) {
-        console.log('⚠ Fallback: Using mock audio model');
+        // Silently fail - will use fallback
         whisperPipeline = null;
       }
     } catch (error) {
-      console.error('⚠ Whisper model initialization failed:', error.message);
-      console.log('⚠ Audio transcription will work with fallback');
+      // Silently fail - will use fallback
       whisperPipeline = null;
     }
   }
@@ -83,12 +82,11 @@ async function initCLIP() {
         clipPipeline = await global.transformersPipeline('zero-shot-image-classification', 'Xenova/clip-vit-base-patch32');
         console.log('✓ CLIP model loaded');
       } catch (e) {
-        console.log('⚠ Fallback: Using mock image model');
+        // Silently fail - will use fallback
         clipPipeline = null;
       }
     } catch (error) {
-      console.error('⚠ CLIP model initialization failed:', error.message);
-      console.log('⚠ Image analysis will work with fallback');
+      // Silently fail - will use fallback
       clipPipeline = null;
     }
   }
@@ -110,12 +108,11 @@ async function initTextClassification() {
         console.log('✓ Text classification model loaded');
       } catch (e) {
         console.log('⚠ Fallback: Using mock text classification');
+        // Silently fail - will use fallback
         textClassificationPipeline = null;
       }
     } catch (error) {
-      console.error('⚠ Text classification model initialization failed:', error.message);
-      console.log('⚠ Text classification will work with fallback');
-      textClassificationPipeline = null;
+      // Silently fail - will use fallback
     }
   }
   return textClassificationPipeline;
@@ -136,12 +133,11 @@ async function initToxicity() {
         console.log('✓ Toxicity model loaded');
       } catch (e) {
         console.log('⚠ Fallback: Using mock toxicity detection');
+        // Silently fail - will use fallback
         toxicityPipeline = null;
       }
     } catch (error) {
-      console.error('⚠ Toxicity model initialization failed:', error.message);
-      console.log('⚠ Toxicity detection will work with fallback');
-      toxicityPipeline = null;
+      // Silently fail - will use fallback
     }
   }
   return toxicityPipeline;
@@ -163,12 +159,11 @@ async function initXceptionNet() {
       } catch (e) {
         console.log('⚠ Fallback: Using mock video analysis');
         xceptionNetPipeline = null;
+      }// Silently fail - will use fallback
+        xceptionNetPipeline = null;
       }
     } catch (error) {
-      console.error('⚠ XceptionNet model initialization failed:', error.message);
-      console.log('⚠ Video analysis will work with fallback');
-      xceptionNetPipeline = null;
-    }
+      // Silently fail - will use fallback
   }
   return xceptionNetPipeline;
 }

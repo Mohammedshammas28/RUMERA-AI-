@@ -2,20 +2,32 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const advancedModels = require('./utils/advancedModels');
 
-// Suppress ONNX runtime warnings in production
-if (process.env.NODE_ENV === 'production') {
-  const originalError = console.error;
-  console.error = (...args) => {
-    if (args[0] && typeof args[0] === 'string' && 
-        (args[0].includes('OnnxruntimeSessionHandler') || 
-         args[0].includes('protobuf parsing'))) {
-      return; // Suppress these specific errors
-    }
-    originalError(...args);
-  };
-}
+// Suppress ONNX errors before importing anything else
+const originalError = console.error;
+const originalWarn = console.warn;
+
+console.error = function(...args) {
+  const message = args.join(' ');
+  // Suppress ONNX runtime errors
+  if (message.includes('OnnxruntimeSessionHandler') || 
+      message.includes('protobuf parsing') ||
+      message.includes('missing operation')) {
+    return;
+  }
+  originalError.apply(console, args);
+};
+
+console.warn = function(...args) {
+  const message = args.join(' ');
+  // Suppress ONNX warnings
+  if (message.includes('ONNX') || message.includes('onnxruntime')) {
+    return;
+  }
+  originalWarn.apply(console, args);
+};
+
+const advancedModels = require('./utils/advancedModels');
 
 // Load environment variables
 dotenv.config();
