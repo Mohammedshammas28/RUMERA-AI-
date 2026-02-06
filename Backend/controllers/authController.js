@@ -19,7 +19,7 @@ exports.signup = async (req, res) => {
     // Check if MongoDB is available
     if (!User.collection.db.client.topology) {
       // MongoDB not available - return mock response
-      const token = generateToken(email);
+      const token = generateToken('demo_' + Date.now(), email, name);
       return res.status(201).json({
         success: true,
         message: 'Demo mode - analysis features available',
@@ -49,7 +49,7 @@ exports.signup = async (req, res) => {
     });
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, user.email, user.name);
 
     // Return response
     res.status(201).json({
@@ -68,12 +68,6 @@ exports.signup = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Server error - analysis features still available',
-    });
-  }
-};
-    res.status(500).json({
-      success: false,
-      message: err.message || 'Server error',
     });
   }
 };
@@ -99,7 +93,8 @@ exports.login = async (req, res) => {
       user = await User.findOne({ email }).select('+password');
     } catch (dbErr) {
       // MongoDB not available - allow demo login
-      const token = generateToken(email);
+      const demoName = email.split('@')[0];
+      const token = generateToken('demo_' + Date.now(), email, demoName);
       return res.status(200).json({
         success: true,
         message: 'Demo mode - analysis features available',
@@ -129,7 +124,7 @@ exports.login = async (req, res) => {
     }
 
     // Generate token
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, user.email, user.name);
 
     // Return response
     res.status(200).json({
@@ -156,7 +151,26 @@ exports.login = async (req, res) => {
 // @access  Private
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id);
+    // Try to get user from database
+    let user = null;
+    try {
+      user = await User.findById(req.user._id);
+    } catch (dbErr) {
+      // MongoDB not available - return user from decoded token (demo mode)
+      console.log('Demo mode: returning user from token');
+      return res.status(200).json({
+        success: true,
+        user: req.user,
+      });
+    }
+
+    if (!user) {
+      // MongoDB available but user not found - return demo response
+      return res.status(200).json({
+        success: true,
+        user: req.user,
+      });
+    }
 
     res.status(200).json({
       success: true,

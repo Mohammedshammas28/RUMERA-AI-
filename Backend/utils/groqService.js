@@ -52,20 +52,30 @@ Respond ONLY with valid JSON, no markdown or extra text.`;
 /**
  * Analyze image for AI generation and manipulation
  */
-const analyzeImage = async (imageBuffer, filename) => {
+const analyzeImage = async (imageBuffer, filename, extractedText = '') => {
   try {
-    const prompt = `Analyze the following image description for signs of AI generation, deepfakes, or manipulation.
+    // Build a more detailed prompt with OCR text if available
+    let contentDescription = `Image filename: ${filename}
+Image size: ${imageBuffer.length} bytes`;
 
-Image filename: ${filename}
-Image size: ${imageBuffer.length} bytes
+    if (extractedText && extractedText.trim()) {
+      contentDescription += `
+
+Extracted text from image:
+${extractedText.substring(0, 500)}`;
+    }
+
+    const prompt = `Analyze the following image for signs of AI generation, deepfakes, or manipulation.
+
+${contentDescription}
 
 Provide a JSON response with:
-- trust_score (0-100)
+- trust_score (0-100, higher = more authentic)
 - ai_generated_probability (0-100)
 - authenticity_badge (Likely Authentic/Suspicious/High Risk)
-- manipulation_score (0-100)
+- manipulation_score (0-100, higher = more manipulated)
 - confidence (0-100)
-- details (object with specific analysis metrics)
+- details (object with specific analysis metrics like: compression_artifacts, lighting_consistency, text_detection, etc.)
 
 Respond ONLY with valid JSON, no markdown or extra text.`;
 
