@@ -4,7 +4,7 @@ const AUTH_API_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL || 'http://localh
 
 const authApi = axios.create({
   baseURL: AUTH_API_BASE_URL,
-  timeout: 30000,
+  timeout: 120000, // 2 minutes for production cold starts
   headers: {
     'Content-Type': 'application/json',
   },

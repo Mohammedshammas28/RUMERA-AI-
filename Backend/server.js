@@ -26,6 +26,13 @@ app.options('*', cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+// Request timeout middleware
+app.use((req, res, next) => {
+  req.setTimeout(180000); // 3 minute request timeout
+  res.setTimeout(180000);
+  next();
+});
+
 // Connect to MongoDB
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI)
@@ -68,8 +75,6 @@ const server = app.listen(PORT, '0.0.0.0', () => {
 
 server.timeout = 300000;
 server.keepAliveTimeout = 65000;
-
-// Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('Shutting down...');
   server.close();
