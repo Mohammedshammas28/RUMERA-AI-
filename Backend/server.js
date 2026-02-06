@@ -1,3 +1,7 @@
+// Disable ONNX and suppress errors BEFORE any imports
+process.env.ONNX_DISABLE = '1';
+process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -9,7 +13,7 @@ const originalWarn = console.warn;
 
 console.error = function(...args) {
   const message = args.join(' ').toLowerCase();
-  if (message.includes('onnx') || message.includes('protobuf') || message.includes('glib')) {
+  if (message.includes('onnx') || message.includes('protobuf') || message.includes('glib') || message.includes('sessionhandler')) {
     return;
   }
   originalError.apply(console, args);
@@ -17,7 +21,7 @@ console.error = function(...args) {
 
 console.warn = function(...args) {
   const message = args.join(' ').toLowerCase();
-  if (message.includes('onnx') || message.includes('protobuf')) {
+  if (message.includes('onnx') || message.includes('protobuf') || message.includes('fallback')) {
     return;
   }
   originalWarn.apply(console, args);
@@ -49,24 +53,30 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Request timeout middleware
 app.use((req, res, next) => {
-  req.setTimeout(180000); // 3 minute request timeout
-  res.setTimeout(180000);
+  req.setTimeout(90000); // 90 second request timeout
+  res.setTimeout(90000);
   next();
 });
 
-// Connect to MongoDB
+// Connect to MongoDB (non-blocking with short timeout)
 if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI)
+  mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 3000,
+    connectTimeoutMS: 3000,
+    socketTimeoutMS: 3000,
+  })
     .then(() => console.log('✓ MongoDB connected for user logging'))
     .catch(err => console.log('⚠ MongoDB unavailable - demo mode'));
 } else {
   console.log('⚠ MONGODB_URI not set - running in demo mode');
 }
 
-// Initialize models in background (non-blocking)
-advancedModels.initializeAllModels().catch(err => {
-  console.log('Models initializing...');
-});
+// Initialize models in background AFTER server starts (non-blocking)
+setTimeout(() => {
+  advancedModels.initializeAllModels().catch(err => {
+    // Silently fail - models use fallback
+  });
+}, 500); // Start after server is ready to accept requests
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
