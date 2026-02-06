@@ -3,28 +3,48 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
+// Disable ONNX completely before any module loads it
+process.env.ONNX_DISABLE = '1';
+process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
+process.env.HF_HUB_DISABLE_SYMLINKS_WARNING = '1';
+
 // Suppress ONNX errors before importing anything else
 const originalError = console.error;
 const originalWarn = console.warn;
+const originalLog = console.log;
 
 console.error = function(...args) {
-  const message = args.join(' ');
-  // Suppress ONNX runtime errors
-  if (message.includes('OnnxruntimeSessionHandler') || 
-      message.includes('protobuf parsing') ||
-      message.includes('missing operation')) {
+  const message = args.join(' ').toLowerCase();
+  // Suppress ONNX, protobuf, and model loading errors
+  if (message.includes('onnx') || 
+      message.includes('protobuf') ||
+      message.includes('missing operation') ||
+      message.includes('sessionhandler') ||
+      message.includes('glib')) {
     return;
   }
   originalError.apply(console, args);
 };
 
 console.warn = function(...args) {
-  const message = args.join(' ');
-  // Suppress ONNX warnings
-  if (message.includes('ONNX') || message.includes('onnxruntime')) {
+  const message = args.join(' ').toLowerCase();
+  // Suppress ONNX and model warnings
+  if (message.includes('onnx') || 
+      message.includes('protobuf') ||
+      message.includes('transformers') ||
+      message.includes('glib')) {
     return;
   }
   originalWarn.apply(console, args);
+};
+
+console.log = function(...args) {
+  const message = args.join(' ').toLowerCase();
+  // Suppress ONNX model loading logs during initialization
+  if (message.includes('fallback') || message.includes('wasm as a fallback')) {
+    return;
+  }
+  originalLog.apply(console, args);
 };
 
 const advancedModels = require('./utils/advancedModels');

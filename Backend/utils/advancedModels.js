@@ -6,6 +6,11 @@
  * - XceptionNet (FaceForensics++): Deepfake/video analysis
  */
 
+// Disable ONNX completely before any transformers imports
+process.env.ONNX_DISABLE = '1';
+process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
+process.env.HF_HUB_DISABLE_SYMLINKS_WARNING = '1';
+
 // Model cache
 let whisperPipeline = null;
 let clipPipeline = null;
