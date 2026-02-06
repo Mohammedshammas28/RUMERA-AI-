@@ -2,6 +2,10 @@
  * Advanced AI Models Integration (CommonJS Compatible)
  */
 
+// Disable ONNX to use WASM backend only
+process.env.ONNX_DISABLE = '1';
+process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
+
 // Model cache
 let whisperPipeline = null;
 let clipPipeline = null;

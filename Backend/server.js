@@ -2,6 +2,27 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+
+// Suppress ONNX errors before importing anything else
+const originalError = console.error;
+const originalWarn = console.warn;
+
+console.error = function(...args) {
+  const message = args.join(' ').toLowerCase();
+  if (message.includes('onnx') || message.includes('protobuf') || message.includes('glib')) {
+    return;
+  }
+  originalError.apply(console, args);
+};
+
+console.warn = function(...args) {
+  const message = args.join(' ').toLowerCase();
+  if (message.includes('onnx') || message.includes('protobuf')) {
+    return;
+  }
+  originalWarn.apply(console, args);
+};
+
 const advancedModels = require('./utils/advancedModels');
 
 // Load environment variables
