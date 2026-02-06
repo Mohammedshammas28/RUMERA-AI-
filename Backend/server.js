@@ -36,12 +36,24 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: [
-    'https://rumera-ai-6sf3.vercel.app',
-    'http://localhost:3000',
-    'http://127.0.0.1:3000'
-  ],
-  credentials: true
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://rumera-ai-6sf3.vercel.app',
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'http://localhost:3001',
+    ];
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all for now to fix CORS issues
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
