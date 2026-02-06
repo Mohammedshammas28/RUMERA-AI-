@@ -107,12 +107,12 @@ async function initTextClassification() {
         textClassificationPipeline = await global.transformersPipeline('text-classification', 'Xenova/distilbert-base-uncased');
         console.log('✓ Text classification model loaded');
       } catch (e) {
-        console.log('⚠ Fallback: Using mock text classification');
         // Silently fail - will use fallback
         textClassificationPipeline = null;
       }
     } catch (error) {
       // Silently fail - will use fallback
+      textClassificationPipeline = null;
     }
   }
   return textClassificationPipeline;
@@ -132,12 +132,12 @@ async function initToxicity() {
         toxicityPipeline = await global.transformersPipeline('text-classification', 'Xenova/toxic-bert');
         console.log('✓ Toxicity model loaded');
       } catch (e) {
-        console.log('⚠ Fallback: Using mock toxicity detection');
         // Silently fail - will use fallback
         toxicityPipeline = null;
       }
     } catch (error) {
       // Silently fail - will use fallback
+      toxicityPipeline = null;
     }
   }
   return toxicityPipeline;
@@ -157,13 +157,13 @@ async function initXceptionNet() {
         xceptionNetPipeline = await global.transformersPipeline('image-classification', 'Xenova/vit-base-patch16-224');
         console.log('✓ XceptionNet model loaded');
       } catch (e) {
-        console.log('⚠ Fallback: Using mock video analysis');
-        xceptionNetPipeline = null;
-      }// Silently fail - will use fallback
+        // Silently fail - will use fallback
         xceptionNetPipeline = null;
       }
     } catch (error) {
       // Silently fail - will use fallback
+      xceptionNetPipeline = null;
+    }
   }
   return xceptionNetPipeline;
 }
