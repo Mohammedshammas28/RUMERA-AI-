@@ -32,8 +32,19 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // Check if user already exists
-    let user = await User.findOne({ email }).catch(() => null);
+    // Check if user already exists with timeout
+    let user = null;
+    try {
+      const queryPromise = User.findOne({ email });
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('DB timeout')), 3000)
+      );
+      user = await Promise.race([queryPromise, timeoutPromise]);
+    } catch (err) {
+      // DB timeout or error - proceed to demo mode
+      user = null;
+    }
+    
     if (user) {
       return res.status(400).json({
         success: false,
@@ -41,12 +52,27 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // Create user
-    user = await User.create({
-      name,
-      email,
-      password,
-    });
+    // Create user with timeout
+    try {
+      const createPromise = User.create({ name, email, password });
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('DB timeout')), 3000)
+      );
+      user = await Promise.race([createPromise, timeoutPromise]);
+    } catch (err) {
+      // DB timeout or error - create demo user
+      const token = generateToken('demo_' + Date.now(), email, name);
+      return res.status(201).json({
+        success: true,
+        message: 'Demo mode - analysis features available',
+        token,
+        user: {
+          id: 'demo_' + Date.now(),
+          name: name,
+          email: email,
+        },
+      });
+    }
 
     // Generate token
     const token = generateToken(user._id, user.email, user.name);
@@ -87,12 +113,16 @@ exports.login = async (req, res) => {
       });
     }
 
-    // Check if MongoDB is available
+    // Check if MongoDB is available with timeout
     let user = null;
     try {
-      user = await User.findOne({ email }).select('+password');
+      const queryPromise = User.findOne({ email }).select('+password');
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('DB timeout')), 3000)
+      );
+      user = await Promise.race([queryPromise, timeoutPromise]);
     } catch (dbErr) {
-      // MongoDB not available - allow demo login
+      // MongoDB not available or timeout - allow demo login
       const demoName = email.split('@')[0];
       const token = generateToken('demo_' + Date.now(), email, demoName);
       return res.status(200).json({
