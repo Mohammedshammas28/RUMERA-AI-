@@ -4,6 +4,19 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const advancedModels = require('./utils/advancedModels');
 
+// Suppress ONNX runtime warnings in production
+if (process.env.NODE_ENV === 'production') {
+  const originalError = console.error;
+  console.error = (...args) => {
+    if (args[0] && typeof args[0] === 'string' && 
+        (args[0].includes('OnnxruntimeSessionHandler') || 
+         args[0].includes('protobuf parsing'))) {
+      return; // Suppress these specific errors
+    }
+    originalError(...args);
+  };
+}
+
 // Load environment variables
 dotenv.config();
 
