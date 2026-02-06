@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const AUTH_API_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL || 'http://localhost:5001';
 
+console.log('Auth API Base URL:', AUTH_API_BASE_URL);
+
 const authApi = axios.create({
   baseURL: AUTH_API_BASE_URL,
-  timeout: 30000,
+  timeout: 120000, // 2 minutes for production cold starts
   headers: {
     'Content-Type': 'application/json',
   },
@@ -64,10 +66,19 @@ export const getCurrentUser = async () => {
     const response = await authApi.get('/api/auth/me');
     return response.data;
   } catch (error) {
-    // Clear token if user is not authenticated
+    // Clear token if user is not authenticated or backend unavailable
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
-    throw error.response?.data || { success: false, message: error.message };
+    
+    // Log error for debugging
+    console.warn('getCurrentUser error:', error.response?.status, error.message);
+    
+    // Return graceful fallback instead of throwing
+    return { 
+      success: false, 
+      message: error.message,
+      user: null 
+    };
   }
 };
 
