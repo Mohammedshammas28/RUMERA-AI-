@@ -19,12 +19,18 @@ async function initTransformers() {
   if (transformersReady) return true;
   
   try {
+    // Suppress ONNX warnings for cleaner logs
+    process.env.ONNX_SKIP_WARMUP = '1';
+    
     const { pipeline, env } = await import('@xenova/transformers');
     global.transformersPipeline = pipeline;
     global.transformersEnv = env;
     
     env.allowLocalModels = true;
     env.allowRemoteModels = true;
+    // Use WASM backend to avoid ONNX runtime issues in production
+    env.backends.onnx.wasm.proxy = false;
+    
     console.log('✓ Transformers module loaded');
     transformersReady = true;
     return true;
