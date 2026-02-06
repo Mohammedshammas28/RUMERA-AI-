@@ -2,11 +2,9 @@ import axios from 'axios';
 
 const AUTH_API_BASE_URL = process.env.NEXT_PUBLIC_AUTH_API_URL || 'http://localhost:5001';
 
-console.log('Auth API Base URL:', AUTH_API_BASE_URL);
-
 const authApi = axios.create({
   baseURL: AUTH_API_BASE_URL,
-  timeout: 120000, // 2 minutes for production cold starts
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   },

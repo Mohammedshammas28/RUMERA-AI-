@@ -8,11 +8,9 @@ import {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
-console.log('API Base URL:', API_BASE_URL);
-
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 180000, // 3 minutes for analysis requests
+  timeout: 60000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -20,19 +18,15 @@ const api = axios.create({
 
 // Request interceptor for logging
 api.interceptors.request.use((config) => {
-  console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`);
   return config;
 });
 
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => {
-    console.log(`API Response: ${response.status} ${response.config.url}`);
     return response;
   },
   (error) => {
-    // Log errors for debugging
-    console.warn(`API Error: ${error.response?.status || error.code} ${error.config?.url}`, error.message);
     return Promise.reject(error);
   }
 );

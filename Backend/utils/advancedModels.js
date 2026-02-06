@@ -1,15 +1,6 @@
 /**
  * Advanced AI Models Integration (CommonJS Compatible)
- * - OpenAI Whisper: Audio transcription
- * - OpenAI CLIP: Image-text understanding and AI detection
- * - Hugging Face Transformers: Text classification
- * - XceptionNet (FaceForensics++): Deepfake/video analysis
  */
-
-// Disable ONNX completely before any transformers imports
-process.env.ONNX_DISABLE = '1';
-process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
-process.env.HF_HUB_DISABLE_SYMLINKS_WARNING = '1';
 
 // Model cache
 let whisperPipeline = null;
@@ -19,31 +10,18 @@ let toxicityPipeline = null;
 let xceptionNetPipeline = null;
 let transformersReady = false;
 
-// Lazy load transformers to handle ESM issues
+// Lazy load transformers
 async function initTransformers() {
   if (transformersReady) return true;
   
   try {
-    // Disable ONNX in production to avoid memory issues and errors
     process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
-    if (process.env.NODE_ENV === 'production') {
-      process.env.ONNX_DISABLE = '1';
-    }
-    
     const { pipeline, env } = await import('@xenova/transformers');
     global.transformersPipeline = pipeline;
     global.transformersEnv = env;
-    
-    // Force WASM backend only
-    env.backends.onnx.wasm.proxy = false;
-    env.allowLocalModels = true;
-    env.allowRemoteModels = true;
-    
-    console.log('✓ Transformers module loaded (WASM backend)');
     transformersReady = true;
     return true;
   } catch (error) {
-    console.error('Failed to load transformers:', error.message);
     return false;
   }
 }
@@ -475,28 +453,18 @@ async function enhancedVideoAnalysis(videoMetadata = {}) {
  * Initialize all models on startup
  */
 async function initializeAllModels() {
-  console.log('\n=== Initializing Advanced AI Models ===');
-  const results = await Promise.all([
+  // Initialize models in background (non-blocking)
+  Promise.all([
     initWhisper(),
     initCLIP(),
     initTextClassification(),
     initToxicity(),
     initXceptionNet()
-  ]);
-
-  const status = {
-    whisper: results[0] ? 'ready' : 'fallback',
-    clip: results[1] ? 'ready' : 'fallback',
-    textClassification: results[2] ? 'ready' : 'fallback',
-    toxicity: results[3] ? 'ready' : 'fallback',
-    xceptionNet: results[4] ? 'ready' : 'fallback'
-  };
-
-  console.log('=== Model Initialization Complete ===');
-  console.log('Model Status:', status);
-  console.log('✓ All AI models initialized successfully (using fallback models as needed)\n');
+  ]).catch(() => {
+    // Silently fail - will use fallback
+  });
   
-  return status;
+  return { status: 'initializing' };
 }
 
 module.exports = {
