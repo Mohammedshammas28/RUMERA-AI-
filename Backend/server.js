@@ -65,8 +65,8 @@ app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Request timeout middleware
 app.use((req, res, next) => {
-  req.setTimeout(90000); // 90 second request timeout
-  res.setTimeout(90000);
+  req.setTimeout(180000); // 3 minute request timeout
+  res.setTimeout(180000);
   next();
 });
 
