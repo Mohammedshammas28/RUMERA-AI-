@@ -91,7 +91,6 @@ setTimeout(() => {
 }, 500); // Start after server is ready to accept requests
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
 app.use('/analyze', require('./routes/analyze'));
 
 // Health check
@@ -113,7 +112,7 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5001;
 const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n✅ RUMERA Backend running on port ${PORT}`);
-  console.log('📝 Auth endpoints: POST /api/auth/signup, /api/auth/login, GET /api/auth/me\n');
+  console.log('� Analysis endpoints: /analyze/text, /analyze/image, /analyze/video, /analyze/audio\n');
 });
 
 server.timeout = 300000;

@@ -6,7 +6,6 @@ import { Navigation } from '@/components/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Shield, Users, Lock, CheckCircle, Zap, Eye } from 'lucide-react';
-import { useAuth } from '@/context/AuthContext';
 
 const container = {
   hidden: { opacity: 0 },
@@ -33,8 +32,6 @@ const item = {
 };
 
 export default function Home() {
-  const { isLoggedIn } = useAuth();
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <Navigation />
@@ -48,14 +45,10 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            {!isLoggedIn && (
-              <>
-                <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 mb-6">
-                  <Zap className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-medium text-foreground">Powered by Responsible AI</span>
-                </div>
-              </>
-            )}
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 mb-6">
+              <Zap className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-foreground">Powered by Responsible AI</span>
+            </div>
 
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-6 text-foreground">
               A New Era of <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Truth</span>
