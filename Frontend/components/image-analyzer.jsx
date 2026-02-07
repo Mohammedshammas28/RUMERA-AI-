@@ -50,31 +50,51 @@ export function ImageAnalyzer() {
   };
 
   return (
-    <div className="space-y-6">
+    <motion.div 
+      className="space-y-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Upload Section */}
       {!preview && (
-        <Card className="border-2 border-dashed border-primary/30 bg-card/30 p-12">
-          <div className="text-center">
-            <Upload className="h-12 w-12 text-primary/50 mx-auto mb-4" />
-            <h3 className="font-semibold text-foreground mb-2">Upload an Image</h3>
-            <p className="text-sm text-muted-foreground mb-6">
-              Drag and drop or click to select an image to analyze
-            </p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={(e) => e.target.files && handleFileSelect(e.target.files[0])}
-              className="hidden"
-            />
-            <Button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
-              Choose Image
-            </Button>
-          </div>
-        </Card>
+        <motion.div
+          whileHover={{ y: -2 }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        >
+          <Card className="border-2 border-dashed border-primary/40 bg-gradient-to-br from-primary/5 via-card to-primary/5 p-12 hover:border-primary/60 hover:shadow-lg transition-all cursor-pointer">
+            <div className="text-center">
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <Upload className="h-12 w-12 text-primary/70 mx-auto mb-4" />
+              </motion.div>
+              <h3 className="font-semibold text-foreground mb-2">Upload an Image</h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Drag and drop or click to select an image to analyze
+              </p>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => e.target.files && handleFileSelect(e.target.files[0])}
+                className="hidden"
+              />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:shadow-lg hover:shadow-primary/50 transition-all"
+                >
+                  Choose Image
+                </Button>
+              </motion.div>
+            </div>
+          </Card>
+        </motion.div>
       )}
 
       {/* Preview Section */}
@@ -209,6 +229,6 @@ export function ImageAnalyzer() {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

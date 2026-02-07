@@ -36,37 +36,57 @@ export function TextAnalyzer() {
   };
 
   return (
-    <div className="space-y-6">
+    <motion.div 
+      className="space-y-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Input Section */}
-      <Card className="border border-border/50 bg-card/50 p-6">
-        <label className="block text-sm font-semibold text-foreground mb-3">
-          Paste or type text to analyze
-        </label>
-        <textarea
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          disabled={isLoading}
-          placeholder="Enter text, caption, or comment here..."
-          className="w-full h-32 px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
-        />
-        <div className="mt-4 flex items-center justify-between">
-          <p className="text-xs text-muted-foreground">{text.length} characters</p>
-          <Button
-            onClick={handleAnalyze}
-            disabled={isLoading || !text.trim()}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Analyzing...
-              </>
-            ) : (
-              'Analyze Text'
-            )}
-          </Button>
-        </div>
-      </Card>
+      <motion.div
+        whileHover={{ y: -2 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
+        <Card className="border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 p-6 shadow-lg hover:shadow-xl transition-shadow">
+          <label className="block text-sm font-semibold text-foreground mb-3">
+            Paste or type text to analyze
+          </label>
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            disabled={isLoading}
+            placeholder="Enter text, caption, or comment here..."
+            className="w-full h-32 px-4 py-3 rounded-lg border border-primary/30 bg-gradient-to-br from-background to-background/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all disabled:opacity-50 resize-none"
+          />
+          <div className="mt-4 flex items-center justify-between">
+            <motion.p 
+              className="text-xs text-muted-foreground"
+              animate={{ opacity: text.length > 0 ? 1 : 0.5 }}
+            >
+              {text.length} characters
+            </motion.p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Button
+                onClick={handleAnalyze}
+                disabled={isLoading || !text.trim()}
+                className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:shadow-lg hover:shadow-primary/50 disabled:opacity-50 transition-all"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Analyzing...
+                  </>
+                ) : (
+                  'Analyze Text'
+                )}
+              </Button>
+            </motion.div>
+          </div>
+        </Card>
+      </motion.div>
 
       {/* Error State */}
       {error && (
@@ -88,12 +108,19 @@ export function TextAnalyzer() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ staggerChildren: 0.1 }}
           className="space-y-6"
         >
           {/* Trust Score */}
-          <Card className="border border-border/50 bg-card/50 p-8 flex justify-center">
-            <TrustScore score={result.trust_score} isLoading={isLoading} />
-          </Card>
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Card className="border border-primary/30 bg-gradient-to-br from-card via-card to-card/30 p-8 flex justify-center shadow-xl">
+              <TrustScore score={result.trust_score} isLoading={isLoading} />
+            </Card>
+          </motion.div>
 
           {/* Classification Results */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -159,6 +186,6 @@ export function TextAnalyzer() {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }

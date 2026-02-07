@@ -84,15 +84,16 @@ export default function Home() {
       </section>
 
       {/* Trust Indicators Section */}
-      <section className="px-4 py-20 bg-card/30 border-y border-border/30">
+      <section className="px-4 py-20 bg-gradient-to-b from-primary/5 via-card/30 to-background border-y border-primary/10">
         <div className="mx-auto max-w-5xl">
           <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold text-center mb-16 text-foreground"
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold text-center mb-16 text-foreground"
           >
-            Trusted by Leaders
+            Trusted by <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Leaders</span>
           </motion.h2>
 
           <motion.div
@@ -122,11 +123,21 @@ export default function Home() {
               const Icon = indicator.icon;
               return (
                 <motion.div key={i} variants={item}>
-                  <Card className="p-6 border border-border/50 bg-card/50 hover:bg-card/70 transition-colors hover:border-primary/30">
-                    <Icon className="h-8 w-8 text-primary mb-4" />
-                    <h3 className="font-semibold text-lg mb-2 text-foreground">{indicator.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{indicator.desc}</p>
-                  </Card>
+                  <motion.div
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Card className="p-6 border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 hover:border-primary/50 transition-all shadow-lg hover:shadow-xl hover:shadow-primary/20">
+                      <motion.div
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ repeat: Infinity, duration: 3, delay: i * 0.3 }}
+                      >
+                        <Icon className="h-8 w-8 text-primary mb-4" />
+                      </motion.div>
+                      <h3 className="font-semibold text-lg mb-2 text-foreground">{indicator.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{indicator.desc}</p>
+                    </Card>
+                  </motion.div>
                 </motion.div>
               );
             })}
@@ -135,16 +146,17 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="why-rumera" className="px-4 py-20">
+      <section id="why-rumera" className="px-4 py-20 bg-gradient-to-b from-background via-primary/5 to-card/30">
         <div className="mx-auto max-w-5xl">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-bold mb-4 text-foreground">Why RUMERA?</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Why <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">RUMERA</span>?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
               Comprehensive content analysis powered by state-of-the-art AI models. Simple for everyone, powerful for professionals.
             </p>
           </motion.div>
@@ -185,12 +197,22 @@ export default function Home() {
               const Icon = feature.icon;
               return (
                 <motion.div key={i} variants={item}>
-                  <Card className="p-8 border border-border/50 bg-card/50 hover:bg-card/70 transition-colors group hover:border-primary/30">
-                    <Icon className="h-10 w-10 text-primary mb-4 group-hover:scale-110 transition-transform" />
-                    <h3 className="font-semibold text-lg mb-2 text-foreground">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{feature.desc}</p>
-                    <p className="text-xs font-medium text-primary/70">{feature.model}</p>
-                  </Card>
+                  <motion.div
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Card className="p-8 border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 hover:border-primary/50 transition-all group shadow-lg hover:shadow-xl hover:shadow-primary/20">
+                      <motion.div
+                        animate={{ rotate: [0, 5, 0] }}
+                        transition={{ repeat: Infinity, duration: 3, delay: i * 0.2 }}
+                      >
+                        <Icon className="h-10 w-10 text-primary mb-4 group-hover:scale-125 transition-transform" />
+                      </motion.div>
+                      <h3 className="font-semibold text-lg mb-2 text-foreground">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{feature.desc}</p>
+                      <p className="text-xs font-medium text-primary/70 bg-primary/10 w-fit px-2 py-1 rounded">{feature.model}</p>
+                    </Card>
+                  </motion.div>
                 </motion.div>
               );
             })}
@@ -199,16 +221,17 @@ export default function Home() {
       </section>
 
       {/* Trust Score Explanation */}
-      <section className="px-4 py-20 bg-card/30 border-y border-border/30">
+      <section className="px-4 py-20 bg-gradient-to-b from-primary/5 via-card/20 to-background border-y border-primary/10">
         <div className="mx-auto max-w-4xl">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold mb-4 text-foreground">Trust Score System</h2>
-            <p className="text-muted-foreground">Clear, transparent scores that help you understand content authenticity</p>
+            <h2 className="text-4xl font-bold mb-4 text-foreground">Trust Score <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">System</span></h2>
+            <p className="text-muted-foreground text-lg">Clear, transparent scores that help you understand content authenticity</p>
           </motion.div>
 
           <motion.div
@@ -239,13 +262,18 @@ export default function Home() {
               },
             ].map((trust, i) => (
               <motion.div key={i} variants={item}>
-                <Card className="p-6 border border-border/50 bg-card/50 text-center">
-                  <div className={`bg-gradient-to-r ${trust.color} bg-clip-text text-transparent mb-2`}>
-                    <div className="text-3xl font-bold">{trust.score}</div>
-                  </div>
-                  <h3 className="font-semibold text-lg mb-2 text-foreground">{trust.label}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{trust.description}</p>
-                </Card>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <Card className="p-6 border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 text-center shadow-lg hover:shadow-xl hover:shadow-primary/20 h-full">
+                    <div className={`bg-gradient-to-r ${trust.color} bg-clip-text text-transparent mb-3`}>
+                      <div className="text-4xl font-bold">{trust.score}</div>
+                    </div>
+                    <h3 className="font-semibold text-lg mb-2 text-foreground">{trust.label}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{trust.description}</p>
+                  </Card>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
@@ -253,22 +281,42 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-4 py-20">
+      <section className="px-4 py-20 bg-gradient-to-b from-background to-primary/5">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
-          className="mx-auto max-w-3xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-12 text-center"
+          transition={{ duration: 0.6, type: 'spring', stiffness: 300 }}
+          className="mx-auto max-w-3xl bg-gradient-to-br from-primary/15 via-primary/10 to-accent/10 border border-primary/30 rounded-2xl p-12 text-center shadow-2xl shadow-primary/20"
         >
-          <h2 className="text-3xl font-bold mb-4 text-foreground">Ready to Verify?</h2>
-          <p className="text-muted-foreground mb-8 text-lg">
+          <motion.h2 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl font-bold mb-4 text-foreground"
+          >
+            Ready to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Verify</span>?
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="text-muted-foreground mb-8 text-lg"
+          >
             Start analyzing content in seconds. No setup required.
-          </p>
-          <Link href="/analyze">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Begin Analysis
-            </Button>
-          </Link>
+          </motion.p>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Link href="/analyze">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground hover:shadow-lg hover:shadow-primary/50 transition-all px-8">
+                Begin Analysis
+              </Button>
+            </Link>
+          </motion.div>
         </motion.div>
       </section>
 

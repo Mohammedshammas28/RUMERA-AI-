@@ -118,7 +118,12 @@ export function AudioAnalyzer() {
   };
 
   return (
-    <div className="space-y-6">
+    <motion.div 
+      className="space-y-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Upload Section */}
       <Card className="border border-border/50 bg-card/50 p-8">
         <div
@@ -318,6 +323,6 @@ export function AudioAnalyzer() {
           </div>
         </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
