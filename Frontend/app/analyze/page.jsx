@@ -56,7 +56,12 @@ export default function AnalyzePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+    <motion.div 
+      className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Navigation />
 
       {/* Hero Section */}
@@ -68,10 +73,10 @@ export default function AnalyzePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              Analyze Content
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 text-foreground">
+              Analyze <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Content</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Choose the content type you want to verify. Our AI tools provide instant analysis with transparency.
             </p>
           </motion.div>
@@ -83,20 +88,27 @@ export default function AnalyzePage() {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
           >
-            {tabs.map((tab) => {
+            {tabs.map((tab, i) => {
               const Icon = tab.icon;
               return (
-                <button
+                <motion.button
                   key={tab.id}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   onClick={() => setActiveTab(tab.id)}
                   className={`relative px-6 py-4 rounded-lg transition-all duration-200 ${
                     activeTab === tab.id
-                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
-                      : 'bg-card/50 text-foreground border border-border/50 hover:bg-card/70 hover:border-primary/30'
+                      ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/40'
+                      : 'bg-gradient-to-br from-card via-card to-card/50 text-foreground border border-primary/20 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20'
                   }`}
                 >
                   <div className="flex items-center gap-3 justify-center">
-                    <Icon className="h-5 w-5" />
+                    <motion.div
+                      animate={activeTab === tab.id ? { scale: [1, 1.1, 1] } : {}}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </motion.div>
                     <div className="text-left">
                       <div className="font-semibold text-sm">{tab.label}</div>
                       <div className={`text-xs ${activeTab === tab.id ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
@@ -104,7 +116,7 @@ export default function AnalyzePage() {
                       </div>
                     </div>
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </motion.div>
@@ -145,11 +157,11 @@ export default function AnalyzePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/30 bg-card/30 px-4 py-8 mt-20">
+      <footer className="border-t border-primary/10 bg-gradient-to-r from-primary/5 via-card/30 to-primary/5 px-4 py-8 mt-20">
         <div className="mx-auto max-w-5xl text-center text-sm text-muted-foreground">
-          <p>Analysis powered by Hugging Face Transformers, OpenAI CLIP, XceptionNet, and Whisper</p>
+          <p>Powered by advanced AI models. Your privacy is protected — data is not stored.</p>
         </div>
       </footer>
-    </div>
+    </motion.div>
   );
 }

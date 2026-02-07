@@ -119,28 +119,6 @@ export function VideoAnalyzer() {
           </Card>
         </motion.div>
       )}
-            <Upload className="h-12 w-12 text-primary/50 mx-auto mb-4" />
-            <h3 className="font-semibold text-foreground mb-2">Upload a Video</h3>
-            <p className="text-sm text-muted-foreground mb-2">
-              Drag and drop or click to select a video file to analyze
-            </p>
-            <p className="text-xs text-muted-foreground mb-6">Maximum size: 500MB</p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="video/*"
-              onChange={(e) => e.target.files && handleFileSelect(e.target.files[0])}
-              className="hidden"
-            />
-            <Button
-              onClick={() => fileInputRef.current?.click()}
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
-              Choose Video
-            </Button>
-          </div>
-        </Card>
-      )}
 
       {/* Preview Section */}
       {preview && (

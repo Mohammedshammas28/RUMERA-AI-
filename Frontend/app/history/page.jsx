@@ -93,72 +93,90 @@ export default function HistoryPage() {
       </section>
 
       {/* Controls Section */}
-      <section className="px-4 py-8 border-b border-border/30 bg-card/30">
+      <section className="px-4 py-8 border-b border-primary/10 bg-gradient-to-r from-primary/5 via-card/30 to-primary/5">
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex gap-2">
-              <button
+            <div className="flex gap-2 flex-wrap">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   filter === 'all'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-foreground hover:bg-muted/80'
+                    ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/50'
+                    : 'bg-muted/50 text-foreground hover:bg-muted/80'
                 }`}
               >
                 All
-              </button>
+              </motion.button>
               {['text', 'image', 'video'].map((type) => {
                 const Icon = getIcon(type);
                 return (
-                  <button
+                  <motion.button
                     key={type}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => setFilter(type)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2 ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
                       filter === type
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-foreground hover:bg-muted/80'
+                        ? 'bg-gradient-to-r from-primary to-primary/80 text-primary-foreground shadow-lg shadow-primary/50'
+                        : 'bg-muted/50 text-foreground hover:bg-muted/80'
                     }`}
                   >
                     <Icon className="h-4 w-4" />
                     {type.charAt(0).toUpperCase() + type.slice(1)}
-                  </button>
+                  </motion.button>
                 );
               })}
             </div>
             <div className="flex gap-2">
               {selectedItems.length > 0 && (
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2 bg-destructive/10 text-destructive hover:bg-destructive/20 border-destructive/30"
+                    onClick={() => setSelectedItems([])}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    Delete Selected
+                  </Button>
+                </motion.div>
+              )}
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex items-center gap-2 bg-transparent"
-                  onClick={() => setSelectedItems([])}
+                  className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 border-primary/30"
                 >
-                  <Trash2 className="h-4 w-4" />
-                  Delete Selected
+                  <Download className="h-4 w-4" />
+                  Export All
                 </Button>
-              )}
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex items-center gap-2 bg-transparent"
-              >
-                <Download className="h-4 w-4" />
-                Export All
-              </Button>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
       {/* History Items */}
-      <section className="px-4 py-12">
+      <section className="px-4 py-12 bg-gradient-to-b from-background to-primary/5">
         <div className="mx-auto max-w-5xl">
           {filteredHistory.length === 0 ? (
-            <Card className="border border-border/50 bg-card/50 p-12 text-center">
-              <Filter className="h-12 w-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-              <h3 className="font-semibold text-foreground mb-2">No analyses found</h3>
-              <p className="text-muted-foreground">Try adjusting your filters or upload new content.</p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <Card className="border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 p-12 text-center shadow-lg">
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 3 }}
+                >
+                  <Filter className="h-12 w-12 text-primary/50 mx-auto mb-4" />
+                </motion.div>
+                <h3 className="font-semibold text-foreground mb-2">No analyses found</h3>
+                <p className="text-muted-foreground">Try adjusting your filters or upload new content.</p>
+              </Card>
+            </motion.div>
           ) : (
             <motion.div
               className="space-y-4"
@@ -188,10 +206,13 @@ export default function HistoryPage() {
                         y: 0,
                       },
                     }}
+                    whileHover={{ y: -2, scale: 1.01 }}
                   >
                     <Card
-                      className={`border border-border/50 p-6 cursor-pointer transition-all hover:border-primary/30 ${
-                        isSelected ? 'bg-primary/5 border-primary/30' : 'bg-card/50'
+                      className={`border p-6 cursor-pointer transition-all shadow-lg hover:shadow-xl ${
+                        isSelected
+                          ? 'border-primary/50 bg-gradient-to-br from-primary/10 to-primary/5'
+                          : 'border-primary/20 bg-gradient-to-br from-card via-card to-card/50 hover:border-primary/50'
                       }`}
                       onClick={() =>
                         setSelectedItems(
@@ -202,13 +223,16 @@ export default function HistoryPage() {
                       }
                     >
                       <div className="flex items-start gap-4">
-                        <div
+                        <motion.div
+                          animate={isSelected ? { scale: [1, 1.1, 1] } : {}}
                           className={`p-3 rounded-lg ${
-                            isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
+                            isSelected
+                              ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground'
+                              : 'bg-primary/10 text-primary'
                           }`}
                         >
                           <Icon className="h-5 w-5" />
-                        </div>
+                        </motion.div>
 
                         <div className="flex-1">
                           <div className="flex items-start justify-between mb-2">
@@ -219,13 +243,15 @@ export default function HistoryPage() {
                               <p className="text-sm text-muted-foreground mt-1">{item.timestamp}</p>
                             </div>
                             <div className="text-right">
-                              <div
-                                className={`text-sm font-semibold bg-gradient-to-r ${getTrustColor(
+                              <motion.div
+                                className={`text-sm font-bold bg-gradient-to-r ${getTrustColor(
                                   item.trustScore
                                 )} bg-clip-text text-transparent`}
+                                animate={{ scale: [1, 1.05, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
                               >
                                 {item.trustScore}
-                              </div>
+                              </motion.div>
                               <p className="text-xs text-muted-foreground mt-1">{item.status}</p>
                             </div>
                           </div>

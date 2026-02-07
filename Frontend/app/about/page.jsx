@@ -53,51 +53,74 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 text-foreground">
-              About RUMERA
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-4 text-foreground">
+              About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">RUMERA</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Building a more trustworthy internet, one verification at a time.
             </p>
           </motion.div>
         </div>
 
         <div className="absolute top-20 right-0 w-72 h-72 bg-accent/10 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
       </section>
 
       {/* Mission Section */}
-      <section className="px-4 py-20">
+      <section className="px-4 py-20 bg-gradient-to-b from-background to-primary/5">
         <div className="mx-auto max-w-4xl">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-12"
+            transition={{ duration: 0.6 }}
+            className="bg-gradient-to-br from-primary/15 via-primary/10 to-accent/10 border border-primary/30 rounded-2xl p-12 shadow-2xl shadow-primary/20"
           >
-            <h2 className="text-3xl font-bold mb-6 text-foreground">Our Mission</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+            <motion.h2 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl font-bold mb-6 text-foreground"
+            >
+              Our <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Mission</span>
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-muted-foreground leading-relaxed mb-4"
+            >
               RUMERA exists to empower individuals, journalists, educators, and organizations with
               accessible tools to identify misinformation, hate speech, and deepfakes in the digital
               age.
-            </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            </motion.p>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-lg text-muted-foreground leading-relaxed"
+            >
               We believe that truth is foundational to a healthy society, and that advanced AI,
               when built responsibly, can be a force for good in combating digital deception.
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </section>
 
       {/* Why Misinformation Matters */}
-      <section className="px-4 py-20 bg-card/30 border-y border-border/30">
+      <section className="px-4 py-20 bg-gradient-to-b from-primary/5 via-card/30 to-background border-y border-primary/10">
         <div className="mx-auto max-w-4xl">
           <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold text-center mb-12 text-foreground"
+            transition={{ duration: 0.6 }}
+            className="text-4xl font-bold text-center mb-12 text-foreground"
           >
-            Why This Matters
+            Why This <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Matters</span>
           </motion.h2>
 
           <motion.div
@@ -264,15 +287,23 @@ export default function AboutPage() {
               },
             ].map((tool, i) => (
               <motion.div key={i} variants={item}>
-                <Card className="border border-border/50 bg-card/50 p-6 hover:bg-card/70 transition-colors">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="font-semibold text-lg text-foreground">{tool.name}</h3>
-                    <span className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full">
-                      {tool.use}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{tool.description}</p>
-                </Card>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <Card className="border border-primary/20 bg-gradient-to-br from-card via-card to-card/50 p-6 hover:border-primary/50 transition-all shadow-lg hover:shadow-xl hover:shadow-primary/20">
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="font-semibold text-lg text-foreground">{tool.name}</h3>
+                      <motion.span 
+                        whileHover={{ scale: 1.05 }}
+                        className="text-xs font-medium px-3 py-1 bg-primary/10 text-primary rounded-full transition-colors hover:bg-primary/20"
+                      >
+                        {tool.use}
+                      </motion.span>
+                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{tool.description}</p>
+                  </Card>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
