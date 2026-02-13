@@ -1,46 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Navigation } from '@/components/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MessageCircle, ImageIcon, Film, Download, Trash2, Filter } from 'lucide-react';
-
-const mockHistory = [
-  {
-    id: 1,
-    type: 'text',
-    content: 'This is a sample text analysis result...',
-    timestamp: '2 hours ago',
-    trustScore: 85,
-    status: 'Clean',
-  },
-  {
-    id: 2,
-    type: 'image',
-    content: 'Sample image analysis',
-    timestamp: '5 hours ago',
-    trustScore: 72,
-    status: 'Suspicious',
-  },
-  {
-    id: 3,
-    type: 'video',
-    content: 'Sample video analysis',
-    timestamp: '1 day ago',
-    trustScore: 45,
-    status: 'High Risk',
-  },
-  {
-    id: 4,
-    type: 'text',
-    content: 'Another text sample for analysis...',
-    timestamp: '2 days ago',
-    trustScore: 90,
-    status: 'Trusted',
-  },
-];
 
 const getIcon = (type) => {
   switch (type) {
@@ -62,11 +27,83 @@ const getTrustColor = (score) => {
 };
 
 export default function HistoryPage() {
+  const [history, setHistory] = useState([]);
   const [filter, setFilter] = useState('all');
   const [selectedItems, setSelectedItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadHistory = () => {
+      try {
+        const savedHistory = localStorage.getItem('analysisHistory');
+        console.log('Raw localStorage data:', savedHistory);
+        if (savedHistory) {
+          const parsedHistory = JSON.parse(savedHistory);
+          console.log('Loaded history:', parsedHistory);
+          setHistory(parsedHistory);
+        } else {
+          console.log('No history found in localStorage');
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error loading history:', error);
+        setIsLoading(false);
+      }
+    };
+
+    // Load immediately
+    loadHistory();
+    
+    // Set up interval to check for new data every 2 seconds
+    const interval = setInterval(loadHistory, 2000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const filteredHistory =
-    filter === 'all' ? mockHistory : mockHistory.filter((item) => item.type === filter);
+    filter === 'all' ? history : history.filter((item) => item.type === filter);
+
+  const handleDeleteSelected = () => {
+    const remaining = history.filter((item) => !selectedItems.includes(item.id));
+    setHistory(remaining);
+    localStorage.setItem('analysisHistory', JSON.stringify(remaining));
+    setSelectedItems([]);
+  };
+
+  const handleDeleteItem = (itemId) => {
+    const remaining = history.filter((item) => item.id !== itemId);
+    setHistory(remaining);
+    localStorage.setItem('analysisHistory', JSON.stringify(remaining));
+    setSelectedItems(selectedItems.filter((id) => id !== itemId));
+  };
+
+  const handleExportAll = () => {
+    if (filteredHistory.length === 0) return;
+
+    const dataStr = JSON.stringify(filteredHistory, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `analysis-history-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleRefresh = () => {
+    setIsLoading(true);
+    try {
+      const savedHistory = localStorage.getItem('analysisHistory');
+      if (savedHistory) {
+        const parsedHistory = JSON.parse(savedHistory);
+        setHistory(parsedHistory);
+        console.log('Refreshed history:', parsedHistory);
+      }
+    } catch (error) {
+      console.error('Error refreshing history:', error);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
@@ -136,7 +173,7 @@ export default function HistoryPage() {
                     variant="outline"
                     size="sm"
                     className="flex items-center gap-2 bg-destructive/10 text-destructive hover:bg-destructive/20 border-destructive/30"
-                    onClick={() => setSelectedItems([])}
+                    onClick={handleDeleteSelected}
                   >
                     <Trash2 className="h-4 w-4" />
                     Delete Selected
@@ -145,9 +182,20 @@ export default function HistoryPage() {
               )}
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Button
+                  size="sm"
+                  className="flex items-center gap-2"
+                  onClick={handleRefresh}
+                >
+                  Refresh
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <Button
                   variant="outline"
                   size="sm"
                   className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 border-primary/30"
+                  onClick={handleExportAll}
+                  disabled={filteredHistory.length === 0}
                 >
                   <Download className="h-4 w-4" />
                   Export All
@@ -161,7 +209,22 @@ export default function HistoryPage() {
       {/* History Items */}
       <section className="px-4 py-12 bg-gradient-to-b from-background to-primary/5">
         <div className="mx-auto max-w-5xl">
-          {filteredHistory.length === 0 ? (
+          {isLoading ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <div className="inline-block">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                  className="h-8 w-8 border-4 border-primary/30 border-t-primary rounded-full"
+                />
+              </div>
+              <p className="text-muted-foreground mt-4">Loading your analysis history...</p>
+            </motion.div>
+          ) : filteredHistory.length === 0 ? (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -174,7 +237,7 @@ export default function HistoryPage() {
                   <Filter className="h-12 w-12 text-primary/50 mx-auto mb-4" />
                 </motion.div>
                 <h3 className="font-semibold text-foreground mb-2">No analyses found</h3>
-                <p className="text-muted-foreground">Try adjusting your filters or upload new content.</p>
+                <p className="text-muted-foreground">Analyze text, images, or videos to see your history here.</p>
               </Card>
             </motion.div>
           ) : (
@@ -266,6 +329,17 @@ export default function HistoryPage() {
                               <Download className="h-3 w-3" />
                               Download
                             </Button>
+                            <motion.button
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteItem(item.id);
+                              }}
+                              className="ml-auto px-3 py-1 rounded text-xs bg-destructive/10 text-destructive hover:bg-destructive/20 transition-colors"
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </motion.button>
                           </div>
                         </div>
                       </div>

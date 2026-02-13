@@ -44,6 +44,32 @@ export function AudioAnalyzer() {
     }
   };
 
+  const saveToHistory = (analysisResult) => {
+    try {
+      if (!analysisResult || typeof analysisResult !== 'object') {
+        console.error('Invalid analysis result:', analysisResult);
+        return;
+      }
+      
+      const trustScore = analysisResult.trust_score || 0;
+      const historyEntry = {
+        id: Date.now(),
+        type: 'audio',
+        content: audioFile.name,
+        timestamp: new Date().toLocaleString(),
+        trustScore: Math.round(trustScore),
+        status: trustScore >= 75 ? 'Clean' : trustScore >= 50 ? 'Suspicious' : 'High Risk',
+        fullData: analysisResult,
+      };
+      const existingHistory = JSON.parse(localStorage.getItem('analysisHistory') || '[]');
+      existingHistory.unshift(historyEntry);
+      localStorage.setItem('analysisHistory', JSON.stringify(existingHistory));
+      console.log('✓ Audio saved to history:', historyEntry);
+    } catch (err) {
+      console.error('Error saving audio to history:', err);
+    }
+  };
+
   const handleAnalyze = async () => {
     if (!audioFile) {
       setError('Please select an audio file to analyze');
@@ -73,6 +99,7 @@ export function AudioAnalyzer() {
 
       const data = await analyzeAudio(transcription, audioFile.name);
       setResult(data);
+      saveToHistory(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
     } finally {

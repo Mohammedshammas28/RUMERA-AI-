@@ -15,6 +15,33 @@ export function TextAnalyzer() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const saveToHistory = (analysisResult) => {
+    try {
+      if (!analysisResult || typeof analysisResult !== 'object') {
+        console.error('Invalid analysis result:', analysisResult);
+        return;
+      }
+      
+      const trustScore = analysisResult.trust_score || 0;
+      const historyEntry = {
+        id: Date.now(),
+        type: 'text',
+        content: text.substring(0, 100) + (text.length > 100 ? '...' : ''),
+        timestamp: new Date().toLocaleString(),
+        trustScore: Math.round(trustScore),
+        status: trustScore >= 75 ? 'Clean' : trustScore >= 50 ? 'Suspicious' : 'High Risk',
+        fullData: analysisResult,
+      };
+
+      const existingHistory = JSON.parse(localStorage.getItem('analysisHistory') || '[]');
+      existingHistory.unshift(historyEntry);
+      localStorage.setItem('analysisHistory', JSON.stringify(existingHistory));
+      console.log('✓ Saved to history:', historyEntry);
+    } catch (err) {
+      console.error('Error saving to history:', err);
+    }
+  };
+
   const handleAnalyze = async () => {
     if (!text.trim()) {
       setError('Please enter text to analyze');
@@ -28,6 +55,7 @@ export function TextAnalyzer() {
     try {
       const data = await analyzeText(text);
       setResult(data);
+      saveToHistory(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
     } finally {

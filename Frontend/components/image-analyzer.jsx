@@ -29,6 +29,32 @@ export function ImageAnalyzer() {
     }
   };
 
+  const saveToHistory = (analysisResult) => {
+    try {
+      if (!analysisResult || typeof analysisResult !== 'object') {
+        console.error('Invalid analysis result:', analysisResult);
+        return;
+      }
+      
+      const trustScore = analysisResult.trust_score || 0;
+      const historyEntry = {
+        id: Date.now(),
+        type: 'image',
+        content: image.name,
+        timestamp: new Date().toLocaleString(),
+        trustScore: Math.round(trustScore),
+        status: trustScore >= 75 ? 'Clean' : trustScore >= 50 ? 'Suspicious' : 'High Risk',
+        fullData: analysisResult,
+      };
+      const existingHistory = JSON.parse(localStorage.getItem('analysisHistory') || '[]');
+      existingHistory.unshift(historyEntry);
+      localStorage.setItem('analysisHistory', JSON.stringify(existingHistory));
+      console.log('✓ Image saved to history:', historyEntry);
+    } catch (err) {
+      console.error('Error saving image to history:', err);
+    }
+  };
+
   const handleAnalyze = async () => {
     if (!image) {
       setError('Please select an image to analyze');
@@ -42,6 +68,7 @@ export function ImageAnalyzer() {
     try {
       const data = await analyzeImage(image);
       setResult(data);
+      saveToHistory(data);
     } catch (err) {
       setError(err.message || 'Analysis failed. Please try again.');
     } finally {
