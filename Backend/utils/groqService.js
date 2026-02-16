@@ -11,17 +11,31 @@ const MODEL = 'llama-3.1-8b-instant';
  */
 const analyzeText = async (text) => {
   try {
-    const prompt = `Analyze the following text for authenticity and trustworthiness. Provide a JSON response with:
-- trust_score (0-100)
-- classification (Authentic/Mixed/Suspicious)
-- toxicity_level (Low/Medium/High)
-- confidence (0-100)
-- flags (array of detected issues)
-- details (object with specific metrics)
+    // Common curse words and profanity patterns (simple check)
+    const profanityPattern = /fuck|shit|asshole|bitch|damn|crap|hell|dick|cock|pussy|motherfuck|bastard|damn|arse|piss/gi;
+    const hasProfanity = profanityPattern.test(text);
+    
+    const prompt = `Analyze the following text for toxicity, hate speech, and trustworthiness. 
 
-Text to analyze: "${text}"
+CRITICAL SCORING RULES:
+- If text contains ANY profanity, curse words, or hate speech: trust_score MUST be 10-30
+- If toxicity_level is HIGH: trust_score MUST be 5-25
+- If toxicity_level is MEDIUM: trust_score MUST be 20-40
+- If toxicity_level is LOW and no profanity: trust_score can be 60+
+- If text is clean and authentic: trust_score can be 75-100
 
-Respond ONLY with valid JSON, no markdown or extra text.`;
+Respond ONLY with valid JSON, no markdown or extra text.
+
+{
+  "trust_score": <number 0-100>,
+  "classification": "<Authentic|Mixed|Suspicious>",
+  "toxicity_level": "<Low|Medium|High>",
+  "confidence": <number 0-100>,
+  "flags": [<array of strings>],
+  "details": {<object>}
+}
+
+Text to analyze: "${text}"`;
 
     const message = await groq.messages.create({
       model: MODEL,
@@ -42,7 +56,47 @@ Respond ONLY with valid JSON, no markdown or extra text.`;
       throw new Error('Failed to parse response');
     }
     
-    return JSON.parse(jsonMatch[0]);
+    const result = JSON.parse(jsonMatch[0]);
+    
+    // AGGRESSIVE toxicity enforcement - override Groq if needed
+    if (hasProfanity) {
+      result.trust_score = Math.min(result.trust_score, 25);
+      result.toxicity_level = 'High';
+    } else if (result.toxicity_level === 'High') {
+      result.trust_score = Math.min(result.trust_score, 25);
+    } else if (result.toxicity_level === 'Medium') {
+      result.trust_score = Math.min(result.trust_score, 40);
+    }
+    
+    // If any flags indicate toxic content, ensure low score
+    const flags = result.flags || [];
+    if (flags.some(f => {
+      const lower = f.toLowerCase();
+      return lower.includes('profanity') || 
+             lower.includes('curse') ||
+             lower.includes('hate') || 
+             lower.includes('slur') ||
+             lower.includes('offensive') ||
+             lower.includes('toxic');
+    })) {
+      result.trust_score = Math.min(result.trust_score, 30);
+    }
+    
+    // Ensure trust_score never exceeds certain thresholds for toxic content
+    if (result.trust_score > 50 && (result.toxicity_level === 'Medium' || result.toxicity_level === 'High')) {
+      result.trust_score = Math.min(result.trust_score, 40);
+    }
+    
+    // Update classification based on corrected trust score
+    if (result.trust_score >= 70) {
+      result.classification = 'Authentic';
+    } else if (result.trust_score >= 45) {
+      result.classification = 'Mixed';
+    } else {
+      result.classification = 'Suspicious';
+    }
+    
+    return result;
   } catch (error) {
     console.error('Text analysis error:', error);
     throw new Error('Failed to analyze text: ' + error.message);

@@ -2,6 +2,9 @@
  * Advanced AI Models Integration (CommonJS Compatible)
  */
 
+// Import Groq service for text analysis
+const groqService = require('./groqService');
+
 // Disable ONNX to use WASM backend only
 process.env.ONNX_DISABLE = '1';
 process.env.TRANSFORMERS_CACHE = '/tmp/transformers_cache';
@@ -328,25 +331,49 @@ async function analyzeVideoFrameForDeepfake(imageBuffer) {
     
     const results = await xception(imageBuffer);
 
-    let deepfakeLikelihood = 0;
-    const deepfakeRelated = results.filter(r => 
-      r.label.toLowerCase().includes('fake') || 
-      r.label.toLowerCase().includes('manipulated') ||
-      r.label.toLowerCase().includes('deepfake')
+    // Find labels that indicate authenticity (real, genuine, unmanipulated)
+    const realLabels = results.filter(r => 
+      r.label.toLowerCase().includes('real') || 
+      r.label.toLowerCase().includes('genuine') || 
+      r.label.toLowerCase().includes('unmanipulated') ||
+      r.label.toLowerCase().includes('authentic')
     );
 
-    if (deepfakeRelated.length > 0) {
-      deepfakeLikelihood = Math.max(...deepfakeRelated.map(r => r.score * 100));
+    // Find labels that indicate forgery/manipulation
+    const fakeLabels = results.filter(r => 
+      r.label.toLowerCase().includes('fake') || 
+      r.label.toLowerCase().includes('manipulated') ||
+      r.label.toLowerCase().includes('deepfake') ||
+      r.label.toLowerCase().includes('forged')
+    );
+
+    // Calculate deepfake likelihood
+    let deepfakeLikelihood = 0;
+    let topRealScore = 0;
+    let topFakeScore = 0;
+
+    if (realLabels.length > 0) {
+      topRealScore = Math.max(...realLabels.map(r => r.score * 100));
     }
 
-    if (deepfakeLikelihood === 0 && results.length > 0) {
-      deepfakeLikelihood = results[0].score * 100;
+    if (fakeLabels.length > 0) {
+      topFakeScore = Math.max(...fakeLabels.map(r => r.score * 100));
+    }
+
+    // Real images should have LOW deepfake likelihood
+    if (topRealScore > topFakeScore && topRealScore > 50) {
+      deepfakeLikelihood = Math.max(0, 100 - topRealScore);
+    } else if (topFakeScore > 50) {
+      deepfakeLikelihood = topFakeScore;
+    } else {
+      // If unclear, assume authentic (low likelihood)
+      deepfakeLikelihood = Math.min(topFakeScore, 15);
     }
 
     return {
       deepfakeLikelihood: Math.round(deepfakeLikelihood),
       isDeepfake: deepfakeLikelihood > 60,
-      confidence: results[0]?.score || 0,
+      confidence: Math.max(topRealScore, topFakeScore) / 100,
       riskLevel: deepfakeLikelihood > 80 ? 'Critical' : deepfakeLikelihood > 60 ? 'High' : deepfakeLikelihood > 30 ? 'Medium' : 'Low',
       topPrediction: results[0]?.label || 'unknown',
       allPredictions: results
@@ -368,20 +395,50 @@ async function analyzeVideoFrameForDeepfake(imageBuffer) {
  * Enhanced text analysis using toxicity + classification
  */
 async function enhancedTextAnalysis(text) {
-  console.log('Running enhanced text analysis...');
+  console.log('Running enhanced text analysis using Groq...');
   
-  const toxicity = await analyzeTextToxicity(text);
-  const classification = await classifyText(text);
+  try {
+    // Use Groq service for text analysis
+    const result = await groqService.analyzeText(text);
+    
+    return {
+      text_input: text.substring(0, 100),
+      trust_score: result.trust_score || 0,
+      classification: result.classification || 'Unknown',
+      toxicity_level: result.toxicity_level || 'Low',
+      confidence: result.confidence || 0,
+      flags: result.flags || [],
+      details: result.details || {}
+    };
+  } catch (error) {
+    console.error('Groq analysis error:', error.message);
+    // Fallback to transformers if Groq fails
+    try {
+      const toxicity = await analyzeTextToxicity(text);
+      const classification = await classifyText(text);
 
-  return {
-    text_input: text.substring(0, 100),
-    toxicity_analysis: toxicity,
-    classification: classification.classification,
-    classification_score: classification.score,
-    hate_speech_detected: toxicity.isToxic,
-    trust_score: 100 - toxicity.toxicityScore,
-    risk_level: toxicity.toxicityLevel
-  };
+      return {
+        text_input: text.substring(0, 100),
+        trust_score: 100 - toxicity.toxicityScore,
+        classification: classification.classification,
+        toxicity_level: toxicity.toxicityLevel,
+        confidence: 0,
+        flags: [],
+        fallback: true,
+        error: error.message
+      };
+    } catch (fallbackError) {
+      console.error('Both Groq and fallback failed:', fallbackError.message);
+      return {
+        trust_score: 50,
+        classification: 'Unknown',
+        toxicity_level: 'Medium',
+        confidence: 0,
+        flags: ['Analysis failed'],
+        error: 'Analysis failed'
+      };
+    }
+  }
 }
 
 /**
@@ -393,12 +450,42 @@ async function enhancedImageAnalysis(imageBuffer, labels = null) {
   const clipAnalysis = await analyzeImageWithCLIP(imageBuffer, labels);
   const deepfakeAnalysis = await analyzeVideoFrameForDeepfake(imageBuffer);
 
+  // Calculate trust score based on both AI generation and manipulation detection
+  const aiGenScore = clipAnalysis.aiGenerationScore || 0;
+  const deepfakeScore = deepfakeAnalysis.deepfakeLikelihood || 0;
+  
+  // Real, unmanipulated images should have HIGH trust scores
+  // AI-generated or manipulated images should have LOW trust scores
+  let trust_score = 100;
+  
+  if (aiGenScore > 50) {
+    // Likely AI-generated
+    trust_score = Math.max(0, 100 - aiGenScore);
+  } else if (deepfakeScore > 50) {
+    // Likely manipulated/deepfake
+    trust_score = Math.max(0, 100 - deepfakeScore);
+  } else {
+    // Likely authentic - slight penalty if any flags detected
+    trust_score = Math.max(50, 100 - Math.max(aiGenScore, deepfakeScore));
+  }
+  
+  // Determine authenticity badge
+  let authenticity_badge = 'Likely Authentic';
+  if (aiGenScore > 60) {
+    authenticity_badge = 'AI Generated';
+  } else if (deepfakeScore > 60) {
+    authenticity_badge = 'Likely Manipulated';
+  }
+
   return {
     ai_generation_analysis: clipAnalysis,
     deepfake_likelihood: deepfakeAnalysis.deepfakeLikelihood,
-    trust_score: 100 - Math.max(clipAnalysis.aiGenerationScore, deepfakeAnalysis.deepfakeLikelihood),
-    authenticity_badge: clipAnalysis.isAiGenerated ? 'AI Generated' : 'Likely Authentic',
-    content_type: clipAnalysis.topPrediction
+    manipulation_detection: deepfakeAnalysis.deepfakeLikelihood,
+    trust_score: Math.round(trust_score),
+    authenticity_badge: authenticity_badge,
+    ai_generated_probability: aiGenScore,
+    content_type: clipAnalysis.topPrediction,
+    deepfake_risk_level: deepfakeAnalysis.riskLevel
   };
 }
 
